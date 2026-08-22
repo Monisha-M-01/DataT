@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
+import { API_URL } from '../config'
 
 export default function UploadScreen({ onJobCreated }) {
   const [file, setFile] = useState(null)
@@ -43,7 +44,7 @@ export default function UploadScreen({ onJobCreated }) {
     formData.append('file', file)
     
     try {
-      const response = await fetch('http://localhost:8000/jobs', {
+      const response = await fetch(`${API_URL}/jobs`, {
         method: 'POST',
         body: formData,
       })

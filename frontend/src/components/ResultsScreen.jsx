@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { API_URL } from '../config'
 
 export default function ResultsScreen({ jobId }) {
   const [results, setResults] = useState([])
@@ -9,7 +10,7 @@ export default function ResultsScreen({ jobId }) {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/jobs/${jobId}/results`)
+        const response = await fetch(`${API_URL}/jobs/${jobId}/results`)
         const data = await response.json()
         setResults(data.results || [])
       } catch (e) {
@@ -22,7 +23,7 @@ export default function ResultsScreen({ jobId }) {
   }, [jobId])
 
   const handleExport = () => {
-    window.open(`http://localhost:8000/jobs/${jobId}/export`, '_blank')
+    window.open(`${API_URL}/jobs/${jobId}/export`, '_blank')
   }
 
   if (loading) return (

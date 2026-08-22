@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import { API_URL } from '../config'
 
 export default function ProcessingScreen({ jobId, onCompleted }) {
   const [status, setStatus] = useState({ processed: 0, total: 0, status: 'processing' })
@@ -8,7 +9,7 @@ export default function ProcessingScreen({ jobId, onCompleted }) {
   useEffect(() => {
     let interval = setInterval(async () => {
       try {
-        const response = await fetch(`http://localhost:8000/jobs/${jobId}/status`)
+        const response = await fetch(`${API_URL}/jobs/${jobId}/status`)
         const data = await response.json()
         
         if (data.processed > prevProcessed.current) {
